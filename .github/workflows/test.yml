@@ -12,7 +12,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 2
     strategy:
       matrix:
         ruby-version: ['3.2', '3.3', '3.4']
@@ -23,7 +23,7 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true
+        #bundler-cache: true
     
     - name: Run tests
       env:
