@@ -1,0 +1,29 @@
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:  # for manual runs  
+  schedule:
+    - cron: '5 18 * * 1' # for scheduled runs
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    strategy:
+      matrix:
+        ruby-version: ['3.2', '3.3', '3.4']
+    
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+    
+    - name: Run tests
+      run: rake test
