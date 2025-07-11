@@ -26,4 +26,6 @@ jobs:
         bundler-cache: true
     
     - name: Run tests
-      run: rake test
+      env:
+          RACK_ENV: test
+      run: bundle exec rake test
