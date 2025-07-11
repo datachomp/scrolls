@@ -20,10 +20,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up Ruby ${{ matrix.ruby-version }}
+      # https://github.com/ruby/setup-ruby/blob/master/action.yml
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        #bundler-cache: true
+        bundler: default
+        bundler-cache: true
+        cache-version: 0  # cache buster if necessary
     
     - name: Run tests
       env:
